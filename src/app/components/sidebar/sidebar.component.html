@@ -1,6 +1,6 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion h-100" id="accordionSidebar">
-  
+
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/">
     <div class="sidebar-brand-icon rotate-n-15">
@@ -12,24 +12,28 @@
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
 
-  <!-- Nav Item - Dashboard -->
-  <li class="nav-item">
-    <a class="nav-link" routerLink="/">
-      <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Inicio</span>
-    </a>
-  </li>
-
-  <!-- Divider -->
-  <hr class="sidebar-divider">
-
   <!-- Menú generado dinámicamente -->
-  <li *ngFor="let form of forms" class="nav-item">
-    <a class="nav-link" [routerLink]="form.url">
-      <i class="fas fa-fw" [ngClass]="form.icon"></i>
-      <span>{{ form.name }}</span>
-    </a>
-  </li>
+  <ng-container *ngFor="let form of menuTree">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="form.url" *ngIf="!form.children.length">
+        <i class="fas fa-fw" [ngClass]="form.icon"></i>
+        <span>{{ form.name }}</span>
+      </a>
+
+      <!-- Si tiene hijos, renderizar como acordeón -->
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" [attr.data-target]="'#collapse' + form.id" *ngIf="form.children.length">
+        <i class="fas fa-fw" [ngClass]="form.icon"></i>
+        <span>{{ form.name }}</span>
+      </a>
+      <div [id]="'collapse' + form.id" class="collapse" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a *ngFor="let child of form.children" class="collapse-item" [routerLink]="child.url">
+            <i class="fas fa-fw" [ngClass]="child.icon"></i> {{ child.name }}
+          </a>
+        </div>
+      </div>
+    </li>
+  </ng-container>
 
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">

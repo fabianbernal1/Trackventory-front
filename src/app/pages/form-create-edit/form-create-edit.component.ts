@@ -12,13 +12,16 @@ import { AlertService } from 'src/app/services/alert.service';
 export class FormCreateEditComponent implements OnInit {
 
   form: Form = {
-    id: 0 ,
+    id: 0,
     url: '',
     name: '',
-    icon: ''
+    icon: '',
+    visible: true,
+    parent: null
   };
 
   editMode = false;
+  availableForms: Form[] = [];
 
   constructor(
     private formService: FormService,
@@ -31,6 +34,21 @@ export class FormCreateEditComponent implements OnInit {
     const idParam = this.route.snapshot.paramMap.get('id');
     const id = idParam ? Number(idParam) : null;
 
+    // 🔹 Cargar formularios disponibles para asignar como padre
+    this.formService.getForms().subscribe({
+      next: (data: Form[]) => {
+        this.availableForms = data;
+        // Si estamos editando, quitamos el actual de la lista para evitar que sea su propio padre
+        if (id) {
+          this.availableForms = this.availableForms.filter(f => f.id !== id);
+        }
+      },
+      error: (err) => {
+        console.error('Error al cargar los formularios disponibles', err);
+      }
+    });
+
+    // 🔹 Si estamos en modo edición, cargamos el form
     if (id) {
       this.editMode = true;
       this.formService.getFormById(id).subscribe({
@@ -69,5 +87,9 @@ export class FormCreateEditComponent implements OnInit {
         }
       });
     }
+  }
+
+  compareForms(f1: Form, f2: Form): boolean {
+    return f1 && f2 ? f1.id === f2.id : f1 === f2;
   }
 }

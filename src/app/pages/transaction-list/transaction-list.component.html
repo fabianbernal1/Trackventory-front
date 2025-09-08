@@ -1,0 +1,87 @@
+<div class="container-fluid">
+  <h1 class="h3 mb-2 text-gray-800">Transacciones</h1>
+  <p class="mb-4">Lista de transacciones registradas en el sistema.</p>
+
+  <div class="card shadow mb-4">
+    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+      <h6 class="m-0 font-weight-bold text-primary">Lista de Transacciones</h6>
+      <a class="btn btn-success" routerLink="/transactions-create">
+        <i class="fas fa-plus"></i> Crear Transacción
+      </a>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Comprador</th>
+              <th>Vendedor</th>
+              <th>Tipo</th>
+              <th>Origen</th>
+              <th>Estado</th>
+              <th class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let transaction of transactions">
+              <tr>
+                <td>{{ transaction.id }}</td>
+                <td>{{ transaction.date | date: 'short' }}</td>
+                <td>{{ transaction.buyer?.username }}</td>
+                <td>{{ transaction.seller?.username }}</td>
+                <td>{{ transaction.transactionType?.name }}</td>
+                <td>{{ transaction.transactionOrigin?.name }}</td>
+                <td>
+                  <span class="badge" [ngClass]="transaction.enabled ? 'badge-success' : 'badge-secondary'">
+                    {{ transaction.enabled ? 'Habilitado' : 'Deshabilitado' }}
+                  </span>
+                </td>
+                <td class="text-center">
+                  <button class="btn btn-sm btn-primary" (click)="toggleDetails(transaction.id)">
+                    <i class="fas" [ngClass]="{'fa-eye': selectedTransactionId !== transaction.id, 
+                                   'fa-eye-slash': selectedTransactionId === transaction.id}">
+                    </i>
+                    {{ selectedTransactionId === transaction.id ? 'Ocultar Detalles' : 'Ver Detalles' }}
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Detalles de la transacción -->
+              <tr *ngIf="selectedTransactionId === transaction.id">
+                <td colspan="7">
+                  <div class="p-3">
+                    <h5>Detalles de Transacción</h5>
+                    <table class="table table-sm table-bordered mt-2">
+                      <thead>
+                        <tr>
+                          <th>Producto</th>
+                          <th>Cantidad</th>
+                          <th>Valor Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let detail of transactionDetails">
+                          <td>{{ detail.stock?.id?.variation?.product?.name }}</td>
+                          <td>{{ detail.quantity }}</td>
+                          <td>{{ detail.total | currency }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div class="text-end mt-3">
+                      <strong>Total de la Transacción:</strong>
+                      <span class="text-success">{{ totalTransactionValue | currency }}</span>
+                    </div>
+
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

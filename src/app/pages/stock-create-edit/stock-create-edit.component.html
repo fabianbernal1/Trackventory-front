@@ -1,0 +1,51 @@
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <!-- Encabezado -->
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">
+          {{ isEditMode ? 'Editar Stock' : 'Crear Stock' }}
+        </h5>
+        <button type="button" class="close" (click)="onCancel()">
+          <span>&times;</span>
+        </button>
+      </div>
+
+      <form (ngSubmit)="onSave()" #stockForm="ngForm">
+        <!-- Cuerpo -->
+        <div class="modal-body">
+          <!-- Variación de Producto -->
+          <div class="form-group">
+            <label for="variationSelect">Variación de Producto</label>
+            <select class="form-control" id="variationSelect" [(ngModel)]="stock.id.variation" name="variationStk"
+              required [compareWith]="compareVariations" [disabled]="isEditMode">
+              <option *ngFor="let variation of productVariations" [ngValue]="variation">
+                {{ variation.variationId }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Cantidad -->
+          <div class="form-group">
+            <label for="quantity">Cantidad</label>
+            <input type="number" class="form-control" id="quantity" [(ngModel)]="stock.quantity" name="quantity"
+              required placeholder="Cantidad">
+          </div>
+        </div>
+        <!-- Campo Enabled -->
+        <div class="form-group form-check mt-3 ml-3">
+          <input type="checkbox" class="form-check-input" id="enabled" [(ngModel)]="stock.enabled" name="enabled">
+          <label class="form-check-label" for="enabled">Habilitado</label>
+        </div>
+
+        <!-- Pie de la modal -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="!stockForm.form.valid">
+            {{ isEditMode ? 'Actualizar' : 'Crear' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

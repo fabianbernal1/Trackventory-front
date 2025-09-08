@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <div class="text-center">
+    <h1 class="h4 text-gray-900 mb-4">
+      {{ editMode ? 'Editar' : 'Crear' }} Categoría
+    </h1>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #categoryForm="ngForm">
+    <!-- Campo de Código -->
+    <div class="form-group">
+      <label for="code">Código</label>
+      <input type="text" class="form-control" id="code" placeholder="Código de la categoría"
+        [(ngModel)]="category.id" name="code" required [readonly]="editMode">
+    </div>
+
+    <!-- Campo de Nombre -->
+    <div class="form-group">
+      <label for="name">Nombre</label>
+      <input type="text" class="form-control" id="name" placeholder="Nombre de la categoría"
+        [(ngModel)]="category.name" name="name" required>
+    </div>
+
+    <!-- Campo de Descripción -->
+    <div class="form-group">
+      <label for="description">Descripción</label>
+      <textarea class="form-control" id="description" placeholder="Descripción de la categoría"
+        [(ngModel)]="category.description" name="description"></textarea>
+    </div>
+
+    <!-- Campo de Estado (Enabled) -->
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="enabled"
+        [(ngModel)]="category.enabled" name="enabled">
+      <label class="form-check-label" for="enabled">Habilitado</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="!categoryForm.form.valid">
+      {{ editMode ? 'Actualizar' : 'Crear' }} Categoría
+    </button>
+  </form>
+
+  <!-- Botón de regreso -->
+  <div class="text-center mt-4 mb-4">
+    <a class="btn btn-secondary" routerLink="/categories">
+      <i class="fas fa-arrow-left"></i> Volver a la lista de categorías
+    </a>
+  </div>
+</div>

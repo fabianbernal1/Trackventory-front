@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <!-- Encabezado -->
+  <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
+  <p class="mb-4">Lista de usuarios registrados en el sistema.</p>
+
+  <!-- Tabla de Usuarios -->
+  <div class="card shadow mb-4">
+    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+      <h6 class="m-0 font-weight-bold text-primary">Lista de Usuarios</h6>
+      <button class="btn btn-success m-1" routerLink="/user-create">
+        <i class="fas fa-plus"></i> Crear Usuario
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Perfil</th>
+              <th>Estado</th>
+              <th class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{ user.id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.lastName }} {{ user.secondLastName }}</td>
+              <td>{{ user.username }}@{{ user.domain }}</td>
+              <td>{{ user.phoneNumber }}</td>
+              <td>{{ user.profile?.name }}</td>
+              <td>
+                <span class="badge" [ngClass]="user.enabled ? 'badge-success' : 'badge-secondary'">
+                  {{ user.enabled ? 'Habilitado' : 'Deshabilitado' }}
+                </span>
+              </td>
+              <td class="text-center">
+                <a class="btn btn-sm btn-primary mr-2" [routerLink]="['/user-edit', user.id]">
+                  <i class="fas fa-edit"></i> Editar
+                </a>
+                <button class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">
+                  <i class="fas fa-trash"></i> Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

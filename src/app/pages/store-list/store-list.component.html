@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <!-- Encabezado -->
+  <h1 class="h3 mb-2 text-gray-800">Tiendas</h1>
+  <p class="mb-4">Lista de las tiendas registradas en el sistema.</p>
+
+  <!-- Tabla de Tiendas -->
+  <div class="card shadow mb-4">
+    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+      <h6 class="m-0 font-weight-bold text-primary">Lista de Tiendas</h6>
+      <button class="btn btn-success m-1" routerLink="/store-create">
+        <i class="fas fa-plus"></i> Crear tienda
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead class="table-light">
+            <tr>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Habilitada</th> <!-- Nueva columna -->
+              <th class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let store of stores">
+              <td>{{ store.name }}</td>
+              <td>{{ store.address }}</td>
+              <td>
+                <span class="badge" [ngClass]="store.enabled ? 'badge-success' : 'badge-secondary'">
+                  {{ store.enabled ? 'Habilitado' : 'Deshabilitado' }}
+                </span>
+              </td>
+              <td class="text-center">
+                <a class="btn btn-sm btn-primary mr-2" [routerLink]="['/store-edit', store.storeId]">
+                  <i class="fas fa-edit"></i> Editar
+                </a>
+                <button class="btn btn-sm btn-danger" (click)="deleteStore(store.storeId)">
+                  <i class="fas fa-trash"></i> Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

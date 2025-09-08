@@ -1,0 +1,52 @@
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <!-- Encabezado -->
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">
+          {{ isEditMode ? 'Editar Variación de Producto' : 'Crear Variación de Producto' }}
+        </h5>
+        <button type="button" class="close" (click)="onCancel()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <form (ngSubmit)="onSave()" #productVariationForm="ngForm">
+        <!-- Cuerpo -->
+        <div class="modal-body">
+
+          <!-- Código de Variación -->
+          <div class="form-group">
+            <label for="variationCode">Código de Variación</label>
+            <input type="text" class="form-control" id="variationCode" [(ngModel)]="productVariation.variationId"
+              name="code" required placeholder="Código de la variación" [readonly]="isEditMode" />
+          </div>
+
+          <!-- Selección de Color -->
+          <div class="form-group">
+            <label for="colorSelect">Color</label>
+            <select class="form-control" id="colorSelect" [(ngModel)]="productVariation.color" name="color_vrt" required
+              [compareWith]="compareColors">
+              <option *ngFor="let color of colors" [ngValue]="color">
+                {{ color.name }}
+              </option>
+            </select>
+          </div>
+          <!-- Campo Enabled -->
+          <div class="form-group form-check mt-3">
+            <input type="checkbox" class="form-check-input" id="enabled" [(ngModel)]="productVariation.enabled"
+              name="enabled">
+            <label class="form-check-label" for="enabled">Habilitado</label>
+          </div>
+        </div>
+
+        <!-- Pie de la modal -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="!productVariationForm.form.valid">
+            {{ isEditMode ? 'Actualizar' : 'Crear' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

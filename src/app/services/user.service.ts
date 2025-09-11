@@ -12,32 +12,37 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  // Crear usuario
-  createUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(`${baserUrl}/users/`, user);
+  createUser(user: User, password: string|null): Observable<User> {
+    const payload = { user, password };
+    return this.httpClient.post<User>(`${baserUrl}/users/`, payload);
   }
 
   getAllUsers(): Observable<User[]> {
-  return this.httpClient.get<User[]>(`${baserUrl}/users`).pipe(
-    map(users => users.sort((a, b) => (a.enabled === b.enabled) ? 0 : a.enabled ? -1 : 1))
-  );
-}
+    return this.httpClient.get<User[]>(`${baserUrl}/users`).pipe(
+      map(users => users.sort((a, b) => (a.enabled === b.enabled) ? 0 : a.enabled ? -1 : 1))
+    );
+  }
 
-getActiveUsers(): Observable<User[]> {
-  return this.httpClient.get<User[]>(`${baserUrl}/users`).pipe(
-    map(users => users.filter(user => user.enabled))
-  );
-}
+  getActiveUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${baserUrl}/users`).pipe(
+      map(users => users.filter(user => user.enabled))
+    );
+  }
 
+
+  // Obtener usuario por id
+  getUserById(id: string): Observable<User> {
+    return this.httpClient.get<User>(`${baserUrl}/users/${id}`);
+  }
 
   // Obtener usuario por username
   getUserByUsername(username: string): Observable<User> {
-    return this.httpClient.get<User>(`${baserUrl}/users/${username}`);
+    return this.httpClient.get<User>(`${baserUrl}/users/username/${username}`);
   }
 
-  // Actualizar usuario (por ID)
-  updateUser(id: string, user: User): Observable<User> {
-    return this.httpClient.put<User>(`${baserUrl}/users/${id}`, user);
+  updateUser(id: string, user: User, password?: string): Observable<User> {
+    const payload = { user, password };
+    return this.httpClient.put<User>(`${baserUrl}/users/${id}`, payload);
   }
 
   // Eliminar usuario (por ID)
@@ -49,4 +54,9 @@ getActiveUsers(): Observable<User[]> {
   validateToken(): Observable<any> {
     return this.httpClient.get<any>(`${baserUrl}/users/validate-token`);
   }
+
+  updatePassword(username: string): Observable<User> {
+    return this.httpClient.put<User>(`${baserUrl}/users/UpdatePassword/${username}`, {});
+  }
+
 }

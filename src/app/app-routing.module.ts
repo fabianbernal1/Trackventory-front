@@ -26,6 +26,7 @@ import { TransactionOriginsListComponent } from './pages/transaction-origins-lis
 import { TransactionOriginsCreateEditComponent } from './pages/transaction-origins-create-edit/transaction-origins-create-edit.component';
 import { TransactionListComponent } from './pages/transaction-list/transaction-list.component';
 import { TransactionCreateEditComponent } from './pages/transaction-create-edit/transaction-create-edit.component';
+import { UserEditComponent } from './pages/user-edit/user-edit.component';
 
 const routes: Routes = [
   {
@@ -239,6 +240,12 @@ const routes: Routes = [
   {
     path : 'transactions-edit/:id',
     component : TransactionCreateEditComponent ,
+    pathMatch : 'full',
+    canActivate:[AuthGuardGuard]
+  },
+  {
+    path : 'user-autoEdit/:username',
+    component : UserEditComponent ,
     pathMatch : 'full',
     canActivate:[AuthGuardGuard]
   }

@@ -46,7 +46,7 @@ export class UserCreateEditComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.editMode = true;
-      this.userService.getUserByUsername(id).subscribe({
+      this.userService.getUserById(id).subscribe({
         next: (data: User) => {
           this.user = data;
 
@@ -98,7 +98,7 @@ export class UserCreateEditComponent implements OnInit {
         }
       });
     } else {
-      this.userService.createUser(this.user).subscribe({
+      this.userService.createUser(this.user,null).subscribe({
         next: () => {
           this.alertService.showSuccess('Usuario creado con éxito');
           this.router.navigate(['/users']);

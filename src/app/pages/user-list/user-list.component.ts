@@ -44,4 +44,16 @@ export class UserListComponent implements OnInit {
       }
     );
   }
+
+  resetPassword(username: string): void {
+  this.userService.updatePassword(username).subscribe(
+    () => {
+      this.alertService.showSuccess(`La contraseña del usuario ${username} fue restablecida con éxito`);
+    },
+    (error) => {
+      console.error('Error al restablecer la contraseña', error);
+      this.alertService.showError(`Error al restablecer la contraseña del usuario ${username}`);
+    }
+  );
+}
 }

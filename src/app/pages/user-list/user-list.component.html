@@ -43,8 +43,11 @@
                 <a class="btn btn-sm btn-primary mr-2" [routerLink]="['/user-edit', user.id]">
                   <i class="fas fa-edit"></i> Editar
                 </a>
-                <button class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">
+                <button class="btn btn-sm btn-danger mr-2" (click)="deleteUser(user.id)">
                   <i class="fas fa-trash"></i> Eliminar
+                </button>
+                <button class="btn btn-sm btn-warning" (click)="resetPassword(user.username)">
+                  <i class="fas fa-key"></i> Restablecer Contraseña
                 </button>
               </td>
             </tr>

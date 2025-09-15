@@ -38,9 +38,9 @@ export class ColorListComponent implements OnInit {
         this.colors = this.colors.filter(color => color.id !== id);
         this.alertService.showSuccess();
       },
-      (error) => {
-        console.error('Error al eliminar el color', error);
-        this.alertService.showError();
+      (err) => {
+        console.error('Error al eliminar el color', err);
+        this.alertService.showError(err?.error);
       }
     );
   }

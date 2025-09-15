@@ -58,7 +58,7 @@ export class StoreCreateEditComponent implements OnInit {
           this.router.navigate(['/stores']);
         },
         error: (err) => {
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
           console.error('Error actualizando la tienda', err);
         }
       });
@@ -69,7 +69,7 @@ export class StoreCreateEditComponent implements OnInit {
           this.router.navigate(['/stores']);
         },
         error: (err) => {
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
           console.error('Error creando la tienda', err);
         }
       });
@@ -125,7 +125,7 @@ export class StoreCreateEditComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error eliminando el stock', err);
-        this.alertService.showError();
+        this.alertService.showError(err?.error);
         this.loadStoreStocks();
       }
     });

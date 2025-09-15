@@ -58,13 +58,13 @@ export class ProfileCreateEditComponent implements OnInit {
             },
             error: (err) => {
               console.error('Error al cargar permisos', err);
-              this.alertService.showError();
+              this.alertService.showError(err?.error);
             }
           });
         },
         error: (err) => {
           console.error('Error al cargar el perfil', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     } else {
@@ -78,7 +78,7 @@ export class ProfileCreateEditComponent implements OnInit {
       next: (roles) => (this.roles = roles),
       error: (err) => {
         console.error('Error al cargar los roles', err);
-        this.alertService.showError();
+        this.alertService.showError(err?.error);
       }
     });
   }
@@ -97,7 +97,7 @@ export class ProfileCreateEditComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al cargar los formularios', err);
-        this.alertService.showError();
+        this.alertService.showError(err?.error);
       }
     });
   }
@@ -152,7 +152,7 @@ export class ProfileCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error actualizando el perfil', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     } else {
@@ -167,7 +167,7 @@ export class ProfileCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error creando el perfil', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     }

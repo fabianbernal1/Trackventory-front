@@ -38,9 +38,9 @@ export class UserListComponent implements OnInit {
         this.users = this.users.filter(user => user.id !== id);
         this.alertService.showSuccess('Usuario eliminado con éxito');
       },
-      (error) => {
-        console.error('Error al eliminar el usuario', error);
-        this.alertService.showError('Error al eliminar el usuario');
+      (err) => {
+        console.error('Error al eliminar el usuario', err);
+        this.alertService.showError(err?.error);
       }
     );
   }
@@ -50,9 +50,9 @@ export class UserListComponent implements OnInit {
     () => {
       this.alertService.showSuccess(`La contraseña del usuario ${username} fue restablecida con éxito`);
     },
-    (error) => {
-      console.error('Error al restablecer la contraseña', error);
-      this.alertService.showError(`Error al restablecer la contraseña del usuario ${username}`);
+    (err) => {
+      console.error('Error al restablecer la contraseña', err);
+      this.alertService.showError(err?.error);
     }
   );
 }

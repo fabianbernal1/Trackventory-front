@@ -26,9 +26,9 @@ export class FormListComponent implements OnInit {
       (data: Form[]) => {
         this.forms = data;
       },
-      (error) => {
-        console.error('Error al cargar los formularios', error);
-        this.alertService.showError();
+      (err) => {
+        console.error('Error al cargar los formularios', err);
+        this.alertService.showError(err?.error);
       }
     );
   }
@@ -39,9 +39,9 @@ export class FormListComponent implements OnInit {
         this.forms = this.forms.filter(form => form.id !== id);
         this.alertService.showSuccess();
       },
-      (error) => {
-        console.error('Error al eliminar el formulario', error);
-        this.alertService.showError();
+      (err) => {
+        console.error('Error al eliminar el formulario', err);
+        this.alertService.showError(err?.error);
       }
     );
   }

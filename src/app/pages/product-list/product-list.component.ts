@@ -75,9 +75,9 @@ export class ProductListComponent implements OnInit {
         this.products = this.products.filter(product => product.productId !== productId);
         this.alertService.showSuccess();
       },
-      (error) => {
-        this.alertService.showError();
-        console.error('Error al eliminar el producto', error);
+      (err) => {
+        this.alertService.showError(err?.error);
+        console.error('Error al eliminar el producto', err);
       }
     );
   }

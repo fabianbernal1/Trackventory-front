@@ -111,7 +111,7 @@ export class TransactionCreateEditComponent implements OnInit {
         this.router.navigate(['/transactions']);
       },
       error: err => {
-        this.alertService.showError();
+        this.alertService.showError(err?.error);
         console.error('Error al guardar transacción', err);
       }
     });

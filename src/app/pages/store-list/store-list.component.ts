@@ -39,9 +39,9 @@ export class StoreListComponent implements OnInit {
         this.stores = this.stores.filter(store => store.storeId !== id);
         this.alertService.showSuccess();
       },
-      (error) => {
-        console.error('Error al eliminar la tienda', error);
-        this.alertService.showError();
+      (err) => {
+        console.error('Error al eliminar la tienda', err);
+        this.alertService.showError(err?.error);
       }
     );
   }
@@ -57,9 +57,9 @@ export class StoreListComponent implements OnInit {
         a.click();
         window.URL.revokeObjectURL(url);
       },
-      (error) => {
-        console.error('Error al descargar el reporte:', error);
-        this.alertService.showError();
+      (err) => {
+        console.error('Error al descargar el reporte:', err);
+        this.alertService.showError(err?.error);
       }
     );
   }

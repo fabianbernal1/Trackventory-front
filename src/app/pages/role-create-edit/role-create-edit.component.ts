@@ -36,7 +36,7 @@ export class RoleCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error al cargar el rol', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     }
@@ -51,7 +51,7 @@ export class RoleCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error actualizando el rol', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     } else {
@@ -62,7 +62,7 @@ export class RoleCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error creando el rol', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     }

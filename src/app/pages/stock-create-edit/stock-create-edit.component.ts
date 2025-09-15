@@ -92,7 +92,7 @@ export class StockCreateEditComponent implements OnInit {
           },
           error: (err) => {
             console.error('Error actualizando el stock', err);
-            this.alertService.showError('Error al actualizar el stock');
+            this.alertService.showError(err?.error);
           }
         });
     } else {
@@ -104,7 +104,7 @@ export class StockCreateEditComponent implements OnInit {
           },
           error: (err) => {
             console.error('Error creando el stock', err);
-            this.alertService.showError('Error al crear el stock');
+            this.alertService.showError(err?.error);
           }
         });
     }

@@ -46,7 +46,7 @@ export class UserEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error cargando usuario', err);
-          this.alertService.showError('Error cargando usuario');
+          this.alertService.showError(err?.error);
         }
       });
     }

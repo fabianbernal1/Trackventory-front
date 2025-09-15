@@ -40,7 +40,7 @@ export class TransactionTypeCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error al cargar el tipo de transacción', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     }
@@ -55,7 +55,7 @@ export class TransactionTypeCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error actualizando el tipo de transacción', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     } else {
@@ -66,7 +66,7 @@ export class TransactionTypeCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error creando el tipo de transacción', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     }

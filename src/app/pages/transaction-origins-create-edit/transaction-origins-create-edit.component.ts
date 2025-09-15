@@ -39,7 +39,7 @@ export class TransactionOriginsCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error al cargar el origen de transacción', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     }
@@ -54,7 +54,7 @@ export class TransactionOriginsCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error actualizando el origen de transacción', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     } else {
@@ -65,7 +65,7 @@ export class TransactionOriginsCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error creando el origen de transacción', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     }

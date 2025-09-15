@@ -1,15 +1,12 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
-
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -53,11 +50,7 @@ import { TransactionOriginsListComponent } from './pages/transaction-origins-lis
 import { TransactionOriginsCreateEditComponent } from './pages/transaction-origins-create-edit/transaction-origins-create-edit.component';
 import { TransactionListComponent } from './pages/transaction-list/transaction-list.component';
 import { TransactionCreateEditComponent } from './pages/transaction-create-edit/transaction-create-edit.component';
-
-
-
-
-
+import { UserEditComponent } from './pages/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +83,8 @@ import { TransactionCreateEditComponent } from './pages/transaction-create-edit/
     TransactionOriginsListComponent,
     TransactionOriginsCreateEditComponent,
     TransactionListComponent,
-    TransactionCreateEditComponent
+    TransactionCreateEditComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,

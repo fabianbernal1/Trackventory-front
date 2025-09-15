@@ -69,7 +69,7 @@ export class ProductCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error actualizando el producto', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     } else {
@@ -80,7 +80,7 @@ export class ProductCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error creando el producto', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     }
@@ -125,7 +125,7 @@ export class ProductCreateEditComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error eliminando la variacion', err);
-        this.alertService.showError();
+        this.alertService.showError(err?.error);
         this.loadProductVariations();
       }
     });

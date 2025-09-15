@@ -6,12 +6,6 @@
   </div>
 
   <form (ngSubmit)="onSubmit()" #categoryForm="ngForm">
-    <!-- Campo de Código -->
-    <div class="form-group">
-      <label for="code">Código</label>
-      <input type="text" class="form-control" id="code" placeholder="Código de la categoría"
-        [(ngModel)]="category.id" name="code" required [readonly]="editMode">
-    </div>
 
     <!-- Campo de Nombre -->
     <div class="form-group">

@@ -38,10 +38,22 @@ export class UserListComponent implements OnInit {
         this.users = this.users.filter(user => user.id !== id);
         this.alertService.showSuccess('Usuario eliminado con éxito');
       },
-      (error) => {
-        console.error('Error al eliminar el usuario', error);
-        this.alertService.showError('Error al eliminar el usuario');
+      (err) => {
+        console.error('Error al eliminar el usuario', err);
+        this.alertService.showError(err?.error);
       }
     );
   }
+
+  resetPassword(username: string): void {
+  this.userService.updatePassword(username).subscribe(
+    () => {
+      this.alertService.showSuccess(`La contraseña del usuario ${username} fue restablecida con éxito`);
+    },
+    (err) => {
+      console.error('Error al restablecer la contraseña', err);
+      this.alertService.showError(err?.error);
+    }
+  );
+}
 }

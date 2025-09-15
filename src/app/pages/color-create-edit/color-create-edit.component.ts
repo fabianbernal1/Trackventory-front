@@ -39,7 +39,7 @@ export class ColorCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error al cargar el color', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     }
@@ -55,7 +55,7 @@ export class ColorCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error actualizando el color', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     } else {
@@ -66,7 +66,7 @@ export class ColorCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error creando el color', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     }

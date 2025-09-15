@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { LoginService } from './../../services/login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
     "password" : '',
   }
 
-  constructor(private snack:MatSnackBar,private loginService:LoginService,private router:Router) { }
+  constructor(private snack:MatSnackBar,private loginService:LoginService,private router:Router,private alertService: AlertService) { }
 
   ngOnInit(): void {
   }
@@ -44,11 +45,9 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/']);
           }
         })
-      },(error) => {
-        console.log(error);
-        this.snack.open('Detalles inválidos , vuelva a intentar !!','Aceptar',{
-          duration:3000
-        })
+      },(err) => {
+        console.log(err);
+        this.alertService.showError(err?.error);
       }
     )
   }

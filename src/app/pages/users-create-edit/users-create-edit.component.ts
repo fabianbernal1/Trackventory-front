@@ -46,7 +46,7 @@ export class UserCreateEditComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.editMode = true;
-      this.userService.getUserByUsername(id).subscribe({
+      this.userService.getUserById(id).subscribe({
         next: (data: User) => {
           this.user = data;
 
@@ -58,7 +58,7 @@ export class UserCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error al cargar el usuario', err);
-          this.alertService.showError('Error al cargar el usuario');
+          this.alertService.showError(err?.error);
         }
       });
     }
@@ -69,7 +69,7 @@ export class UserCreateEditComponent implements OnInit {
       next: (profiles) => this.profiles = profiles,
       error: (err) => {
         console.error('Error al cargar perfiles', err);
-        this.alertService.showError('Error al cargar perfiles');
+        this.alertService.showError(err?.error);
       }
     });
   }
@@ -83,7 +83,7 @@ export class UserCreateEditComponent implements OnInit {
     }
 
     if (this.profileId != 0) {
-      this.user.profile = { id: this.profileId, name: '', rol_prf: { id: 0, name: '', enabled: true} ,enabled: true};
+      this.user.profile = { id: this.profileId, name: '', rol_prf: { id: 0, name: '', enabled: true }, enabled: true };
     }
 
     if (this.editMode) {
@@ -94,18 +94,18 @@ export class UserCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error actualizando el usuario', err);
-          this.alertService.showError('Error al actualizar el usuario');
+          this.alertService.showError(err?.error);
         }
       });
     } else {
-      this.userService.createUser(this.user).subscribe({
+      this.userService.createUser(this.user, null).subscribe({
         next: () => {
           this.alertService.showSuccess('Usuario creado con éxito');
           this.router.navigate(['/users']);
         },
         error: (err) => {
           console.error('Error creando el usuario', err);
-          this.alertService.showError('Error al crear el usuario');
+          this.alertService.showError(err?.error);
         }
       });
     }

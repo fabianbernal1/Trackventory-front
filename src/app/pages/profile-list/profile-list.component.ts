@@ -38,9 +38,9 @@ export class ProfileListComponent implements OnInit {
         this.profiles = this.profiles.filter(profile => profile.id !== id);
         this.alertService.showSuccess();
       },
-      (error) => {
-        console.error('Error al eliminar el perfil', error);
-        this.alertService.showError();
+      (err) => {
+        console.error('Error al eliminar el perfil', err);
+        this.alertService.showError(err?.error);
       }
     );
   }

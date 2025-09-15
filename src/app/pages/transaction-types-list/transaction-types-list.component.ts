@@ -27,9 +27,9 @@ export class TransactionTypesListComponent implements OnInit {
       (data: TransactionTypes[]) => {
         this.transactionTypes = data;
       },
-      (error) => {
-        console.error('Error al cargar los tipos de transacción', error);
-        this.alertService.showError();
+      (err) => {
+        console.error('Error al cargar los tipos de transacción', err);
+        this.alertService.showError(err?.error);
       }
     );
   }
@@ -40,9 +40,9 @@ export class TransactionTypesListComponent implements OnInit {
         this.transactionTypes = this.transactionTypes.filter(type => type.id !== id);
         this.alertService.showSuccess();
       },
-      (error) => {
-        console.error('Error al eliminar el tipo de transacción', error);
-        this.alertService.showError();
+      (err) => {
+        console.error('Error al eliminar el tipo de transacción', err);
+        this.alertService.showError(err?.error);
       }
     );
   }

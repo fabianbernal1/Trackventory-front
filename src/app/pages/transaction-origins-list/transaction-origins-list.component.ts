@@ -26,9 +26,9 @@ export class TransactionOriginsListComponent implements OnInit {
       (data: TransactionOrigins[]) => {
         this.transactionOrigins = data;
       },
-      (error) => {
-        console.error('Error al cargar los orígenes de transacción', error);
-        this.alertService.showError();
+      (err) => {
+        console.error('Error al cargar los orígenes de transacción', err);
+        this.alertService.showError(err?.error);
       }
     );
   }
@@ -39,9 +39,9 @@ export class TransactionOriginsListComponent implements OnInit {
         this.transactionOrigins = this.transactionOrigins.filter(origin => origin.id !== id);
         this.alertService.showSuccess();
       },
-      (error) => {
-        console.error('Error al eliminar el origen de transacción', error);
-        this.alertService.showError();
+      (err) => {
+        console.error('Error al eliminar el origen de transacción', err);
+        this.alertService.showError(err?.error);
       }
     );
   }

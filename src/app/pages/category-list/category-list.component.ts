@@ -35,12 +35,11 @@ export class CategoryListComponent implements OnInit {
   deleteCategory(id: number): void {
     this.categoryService.deleteCategory(id).subscribe(
       () => {
-        this.categories = this.categories.filter(category => category.id! == id);
+        this.loadCategories()
         this.alertService.showSuccess();
       },
-      (error) => {
-        console.error('Error al eliminar la categoría', error);
-        this.alertService.showError();
+      (err) => {
+        this.alertService.showError(err?.error);
       }
     );
   }

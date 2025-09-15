@@ -57,7 +57,7 @@ export class FormCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error al cargar el formulario', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     }
@@ -72,7 +72,7 @@ export class FormCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error actualizando el formulario', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     } else {
@@ -83,7 +83,7 @@ export class FormCreateEditComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error creando el formulario', err);
-          this.alertService.showError();
+          this.alertService.showError(err?.error);
         }
       });
     }

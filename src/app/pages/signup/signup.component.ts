@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
     this.user.domain = parts[1];
 
     // Crear usuario
-    this.userService.createUser(this.user).subscribe(
+    this.userService.createUser(this.user,this.user.password).subscribe(
       (data) => {
         Swal.fire('Usuario guardado', 'Usuario registrado con éxito en el sistema', 'success').then(() => {
           this.router.navigate(['/login']);

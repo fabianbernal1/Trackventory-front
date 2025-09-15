@@ -26,9 +26,9 @@ export class RoleListComponent implements OnInit {
       (data: Rol[]) => {
         this.roles = data;
       },
-      (error) => {
-        console.error('Error al cargar los roles', error);
-        this.alertService.showError();
+      (err) => {
+        console.error('Error al cargar los roles', err);
+        this.alertService.showError(err?.error);
       }
     );
   }
@@ -39,9 +39,9 @@ export class RoleListComponent implements OnInit {
         this.roles = this.roles.filter(role => role.id !== id);
         this.alertService.showSuccess();
       },
-      (error) => {
-        console.error('Error al eliminar el rol', error);
-        this.alertService.showError();
+      (err) => {
+        console.error('Error al eliminar el rol', err);
+        this.alertService.showError(err?.error);
       }
     );
   }

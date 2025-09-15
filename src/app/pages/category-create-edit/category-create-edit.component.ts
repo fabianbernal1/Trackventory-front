@@ -45,8 +45,7 @@ export class CategoryCreateEditComponent implements OnInit {
           this.router.navigate(['/categories']);
         },
         error: (err) => {
-          this.alertService.showError();
-          console.error('Error actualizando la categoría', err);
+          this.alertService.showError(err?.error);         
         }
       });
     } else {
@@ -56,8 +55,7 @@ export class CategoryCreateEditComponent implements OnInit {
           this.router.navigate(['/categories']);
         },
         error: (err) => {
-          this.alertService.showError();
-          console.error('Error creando la categoría', err);
+          this.alertService.showError(err?.error);
         }
       });
     }

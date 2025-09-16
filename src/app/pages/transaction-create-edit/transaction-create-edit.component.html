@@ -84,9 +84,9 @@
               <td>{{ detail.quantity }}</td>
               <td>{{ detail.total | currency }}</td>
               <td>
-                <span class="badge" [ngClass]="detail.enabled ? 'bg-success' : 'bg-danger'">
-                  {{ detail.enabled ? 'Sí' : 'No' }}
-                </span>
+                <span class="badge" [ngClass]="detail.enabled ? 'badge-success' : 'badge-secondary'">
+                    {{ detail.enabled ? 'Habilitado' : 'Deshabilitado' }}
+                  </span>
               </td>
               <td class="text-center">
                 <button type="button" class="btn btn-sm btn-danger" (click)="deleteTransactionDetail(detail.id)">

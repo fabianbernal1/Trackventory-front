@@ -6,18 +6,6 @@
   </div>
 
   <form (ngSubmit)="onSubmit()" #transactionOriginForm="ngForm">
-    <!-- Campo de id -->
-    <div class="form-group">
-      <label for="id">Id del Origen</label>
-      <input type="text" 
-             class="form-control" 
-             id="id" 
-             placeholder="Ingrese el id"
-             [(ngModel)]="transactionOrigin.id" 
-             name="id" 
-             required 
-             [disabled]="editMode">
-    </div>
 
     <!-- Campo de Nombre -->
     <div class="form-group">
@@ -42,16 +30,10 @@
     </div>
 
     <!-- Campo de Habilitado -->
-    <div class="form-group">
-      <label for="enabled">Habilitado</label>
-      <select class="form-control" 
-              id="enabled" 
-              [(ngModel)]="transactionOrigin.enabled" 
-              name="enabled" 
-              required>
-        <option [ngValue]="true">Sí</option>
-        <option [ngValue]="false">No</option>
-      </select>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="enabled"
+        [(ngModel)]="transactionOrigin.enabled" name="enabled">
+      <label class="form-check-label" for="enabled">Habilitado</label>
     </div>
 
     <!-- Botón para enviar -->

@@ -31,7 +31,7 @@ export class TransactionCreateEditComponent implements OnInit {
   };
 
   transactionDetails: TransactionDetails[] = [];
-  newTransactionDetail: TransactionDetails = { id: 0, transaction: this.transaction, stock: null, quantity: 0, total: 0,enabled: true };
+  newTransactionDetail: TransactionDetails = { id: 0, transaction: this.transaction, stock: null, quantity: 1, total: 0,enabled: true };
 
   stocks: Stock[] = [];
   users: User[] = [];
@@ -99,13 +99,7 @@ export class TransactionCreateEditComponent implements OnInit {
     }
 
     this.transactionService.saveTransaction(
-      this.transactionDetails,
-      this.transaction.buyer.id,
-      this.transaction.seller.id,
-      this.transaction.transactionType.id,
-      this.transaction.transactionOrigin.id,
-      this.transaction.date
-    ).subscribe({
+      { transactionDetails: this.transactionDetails, buyerId: this.transaction.buyer.id, sellerId: this.transaction.seller.id, transactionType: this.transaction.transactionType.id, transactionOrigin: this.transaction.transactionOrigin.id, transactionDate: this.transaction.date, enabled: this.transaction.enabled }    ).subscribe({
       next: () => {
         this.alertService.showSuccess();
         this.router.navigate(['/transactions']);
@@ -122,7 +116,7 @@ export class TransactionCreateEditComponent implements OnInit {
       this.newTransactionDetail.total = this.newTransactionDetail.stock.id.variation.product.salePrice * this.newTransactionDetail.quantity;
       this.transactionDetails.push({ ...this.newTransactionDetail });
       this.transactionDetails = [...this.transactionDetails];
-      this.newTransactionDetail = { id: 0, transaction: this.transaction, stock: null, quantity: 0, total: 0,enabled: true };
+      this.newTransactionDetail = { id: 0, transaction: this.transaction, stock: null, quantity: 1, total: 0,enabled: true };
     } else {
       this.alertService.showError('Debe llenar los campos del detalle.');
     }

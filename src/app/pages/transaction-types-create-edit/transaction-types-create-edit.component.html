@@ -6,12 +6,6 @@
   </div>
 
   <form (ngSubmit)="onSubmit()" #transactionTypeForm="ngForm">
-    <!-- Campo de ID -->
-    <div class="form-group">
-      <label for="id">Id del Tipo de Transacción</label>
-      <input type="text" class="form-control" id="id" placeholder="Ingrese el id" [(ngModel)]="transactionType.id"
-        name="id" required [disabled]="editMode">
-    </div>
 
     <!-- Campo de Nombre -->
     <div class="form-group">

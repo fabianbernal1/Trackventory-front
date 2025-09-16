@@ -38,19 +38,13 @@ getActiveTransactions(): Observable<Transactions[]> {
   }
 
   saveTransaction(
-    transactionDetails: TransactionDetails[],
-    buyerId: string,
-    sellerId: string,
-    transactionType: number,
-    transactionOrigin: number,
-    transactionDate?: Date | null
-  ): Observable<Transactions> {
+{ transactionDetails, buyerId, sellerId, transactionType, transactionOrigin, transactionDate, enabled }: { transactionDetails: TransactionDetails[]; buyerId: string; sellerId: string; transactionType: number; transactionOrigin: number; transactionDate?: Date | null; enabled: boolean; }  ): Observable<Transactions> {
     let params = new HttpParams()
       .set('buyerId', buyerId.toString())
       .set('sellerId', sellerId.toString())
       .set('transactionType', transactionType.toString())
-      .set('transactionOrigin', transactionOrigin.toString());
-
+      .set('transactionOrigin', transactionOrigin.toString())
+      .set('enabled', enabled.toString());
     if (transactionDate) {
       const dateObj = new Date(transactionDate);
       const formattedDate = dateObj.toISOString().slice(0, 16); 

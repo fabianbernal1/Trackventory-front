@@ -21,7 +21,7 @@ export class UserCreateEditComponent implements OnInit {
     lastName: '',
     secondLastName: '',
     phoneNumber: '',
-    domain: '',
+    email: '',
     enabled: true,
     profile: null
   };
@@ -29,9 +29,6 @@ export class UserCreateEditComponent implements OnInit {
   profileId: number = 0;
   profiles: Profile[] = [];
   editMode = false;
-
-  // 👉 Nuevo campo auxiliar para el formulario
-  email: string = '';
 
   constructor(
     private userService: UserService,
@@ -52,9 +49,6 @@ export class UserCreateEditComponent implements OnInit {
 
           this.profileId = this.user.profile ? this.user.profile.id : 0;
 
-          if (this.user.username && this.user.domain) {
-            this.email = `${this.user.username}@${this.user.domain}`;
-          }
         },
         error: (err) => {
           console.error('Error al cargar el usuario', err);
@@ -75,12 +69,6 @@ export class UserCreateEditComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // 👉 Antes de enviar al backend, separamos email en username + domain
-    if (this.email.includes('@')) {
-      const [username, domain] = this.email.split('@');
-      this.user.username = username;
-      this.user.domain = domain;
-    }
 
     if (this.profileId != 0) {
       this.user.profile = { id: this.profileId, name: '', rol_prf: { id: 0, name: '', enabled: true }, enabled: true };

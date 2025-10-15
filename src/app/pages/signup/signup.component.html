@@ -56,11 +56,19 @@
                     </mat-form-field>
                   </div>
 
+                  <!-- Nombre de usuario -->
+                  <div class="form-group">
+                    <mat-form-field class="full-width" appearance="outline">
+                      <mat-label>User</mat-label>
+                      <input [(ngModel)]="user.username" name="user" required type="user" matInput placeholder="Digite su Nombre de Usuario">
+                    </mat-form-field>
+                  </div>
+
                   <!-- Email -->
                   <div class="form-group">
                     <mat-form-field class="full-width" appearance="outline">
                       <mat-label>Email</mat-label>
-                      <input [(ngModel)]="email" name="email" required type="email" matInput placeholder="Digite su email">
+                      <input [(ngModel)]="user.email" name="email" required type="email" matInput placeholder="Digite su email">
                     </mat-form-field>
                   </div>
 

@@ -30,7 +30,13 @@
     <!-- Correo -->
     <div class="form-group">
       <label for="email">Correo electrónico</label>
-      <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" readonly>
+      <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" >
+    </div>
+
+    <!-- Nombre de usuario -->
+    <div class="form-group">
+      <label for="user">Nombre de Usuario</label>
+      <input type="user" class="form-control" id="user" [(ngModel)]="user.username" name="user" readonly>
     </div>
 
     <!-- Teléfono -->

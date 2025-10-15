@@ -51,6 +51,7 @@ import { TransactionOriginsCreateEditComponent } from './pages/transaction-origi
 import { TransactionListComponent } from './pages/transaction-list/transaction-list.component';
 import { TransactionCreateEditComponent } from './pages/transaction-create-edit/transaction-create-edit.component';
 import { UserEditComponent } from './pages/user-edit/user-edit.component';
+import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { UserEditComponent } from './pages/user-edit/user-edit.component';
     TransactionOriginsCreateEditComponent,
     TransactionListComponent,
     TransactionCreateEditComponent,
-    UserEditComponent
+    UserEditComponent,
+    PasswordResetComponent
   ],
   imports: [
     BrowserModule,

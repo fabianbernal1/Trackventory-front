@@ -19,12 +19,11 @@ export class UserEditComponent implements OnInit {
     lastName: '',
     secondLastName: '',
     phoneNumber: '',
-    domain: '',
+    email: '',
     enabled: true,
     profile: null
   };
 
-  email: string = '';
   editMode = true;
   showPasswordField = false; // 👈 controla si se muestra el campo de contraseña
   newPassword: string = '';   // 👈 almacena la nueva contraseña
@@ -42,7 +41,6 @@ export class UserEditComponent implements OnInit {
       this.userService.getUserByUsername(username).subscribe({
         next: (data: User) => {
           this.user = data;
-          this.email = `${this.user.username}@${this.user.domain}`;
         },
         error: (err) => {
           console.error('Error cargando usuario', err);

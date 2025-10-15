@@ -13,9 +13,6 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
 
-  // Email completo (campo del formulario)
-  public email: string = '';
-
   // Usuario siguiendo el modelo
   public user: User = {
     id: '',
@@ -25,7 +22,7 @@ export class SignupComponent implements OnInit {
     lastName: '',
     secondLastName: '',
     phoneNumber: '',
-    domain: '',
+    email: '',
     enabled: true,
     profile: null
   };
@@ -35,7 +32,7 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void { }
 
   formSubmit() {
-    if (!this.email || this.email.trim() === '') {
+    if (!this.user.email || this.user.email.trim() === '') {
       this.snack.open('El email es requerido !!', 'Aceptar', {
         duration: 3000,
         verticalPosition: 'top',
@@ -43,17 +40,6 @@ export class SignupComponent implements OnInit {
       });
       return;
     }
-
-    // Separar email → username + domain
-    const parts = this.email.split('@');
-    if (parts.length !== 2) {
-      this.snack.open('Formato de email inválido !!', 'Aceptar', {
-        duration: 3000
-      });
-      return;
-    }
-    this.user.username = parts[0];
-    this.user.domain = parts[1];
 
     // Crear usuario
     this.userService.createUser(this.user,this.user.password).subscribe(

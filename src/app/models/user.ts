@@ -8,7 +8,7 @@ export interface User {
   lastName: string;        
   secondLastName: string;  
   phoneNumber: string;     
-  domain: string;          
+  email: string;          
   enabled: boolean;        
   profile: Profile | null;        
 }

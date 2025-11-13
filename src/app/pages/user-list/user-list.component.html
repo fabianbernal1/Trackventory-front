@@ -40,13 +40,13 @@
                 </span>
               </td>
               <td class="text-center">
-                <a class="btn btn-sm btn-primary mr-2" [routerLink]="['/user-edit', user.id]">
+                <a class="btn btn-sm btn-primary m-1" [routerLink]="['/user-edit', user.id]">
                   <i class="fas fa-edit"></i> Editar
                 </a>
-                <button class="btn btn-sm btn-danger mr-2" (click)="deleteUser(user.id)">
+                <button class="btn btn-sm btn-danger m-1" (click)="deleteUser(user.id)">
                   <i class="fas fa-trash"></i> Eliminar
                 </button>
-                <button class="btn btn-sm btn-warning" (click)="resetPassword(user.username)">
+                <button class="btn btn-sm btn-warning m-1" (click)="resetPassword(user.username)">
                   <i class="fas fa-key"></i> Restablecer Contraseña
                 </button>
               </td>

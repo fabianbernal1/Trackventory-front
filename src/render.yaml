@@ -1,0 +1,5 @@
+staticPublishPath: dist/Trackventory
+routes:
+  - type: rewrite
+    source: /*
+    destination: /index.html

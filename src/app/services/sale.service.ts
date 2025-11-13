@@ -3,37 +3,37 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Sale } from '../models/sale';
 import { SaleDetail } from '../models/saleDetail';
+import baserUrl from './helper';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SaleService {
-  private baseUrl = 'http://localhost:8080/sales'; // Cambia esto a la URL base de tu API
 
   constructor(private http: HttpClient) {}
 
   // Método para obtener todas las ventas
   getAllSales(): Observable<Sale[]> {
-    return this.http.get<Sale[]>(`${this.baseUrl}/all`);
+    return this.http.get<Sale[]>(`${baserUrl}/all`);
   }
 
   // Método para obtener una venta por ID
   getSaleById(id: number): Observable<Sale> {
-    return this.http.get<Sale>(`${this.baseUrl}/${id}`);
+    return this.http.get<Sale>(`${baserUrl}/${id}`);
   }
 
   // Método para obtener los detalles de una venta específica
   getSaleDetailsBySaleId(id: number): Observable<SaleDetail[]> {
-    return this.http.get<SaleDetail[]>(`${this.baseUrl}/${id}/details`);
+    return this.http.get<SaleDetail[]>(`${baserUrl}/${id}/details`);
   }
 
   // Método para guardar o actualizar una venta
   saveSale(saleDetails: SaleDetail[]): Observable<Sale> {
-    return this.http.post<Sale>(`${this.baseUrl}/save`, saleDetails);
+    return this.http.post<Sale>(`${baserUrl}/save`, saleDetails);
   }  
 
   // Método para eliminar una venta por ID
   deleteSale(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
+    return this.http.delete<void>(`${baserUrl}/delete/${id}`);
   }
 }

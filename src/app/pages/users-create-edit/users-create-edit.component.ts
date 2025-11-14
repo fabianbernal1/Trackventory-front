@@ -5,6 +5,9 @@ import { User } from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { Profile } from 'src/app/models/profile';
+import { UserPasswordResponse } from 'src/app/models/userPasswordResponse';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-user-create-edit',
@@ -29,6 +32,12 @@ export class UserCreateEditComponent implements OnInit {
   profileId: number = 0;
   profiles: Profile[] = [];
   editMode = false;
+
+  generatedPassword: string | null = null;
+
+  private passwordModal: any;
+
+
 
   constructor(
     private userService: UserService,
@@ -86,19 +95,35 @@ export class UserCreateEditComponent implements OnInit {
         }
       });
     } else {
-      this.userService.createUser(this.user, null).subscribe({
-        next: () => {
-          this.alertService.showSuccess('Usuario creado con éxito');
-          this.router.navigate(['/users']);
-        },
-        error: (err) => {
-          console.error('Error creando el usuario', err);
-          this.alertService.showError(err?.error);
-        }
-      });
+  this.userService.createUser(this.user, null).subscribe({
+    next: (response: UserPasswordResponse) => {
+
+      this.generatedPassword = response.password;
+
+      this.passwordModal = new bootstrap.Modal(document.getElementById('passwordModal'));
+this.passwordModal.show();
+
+    },
+    error: (err) => {
+      console.error('Error creando el usuario', err);
+      this.alertService.showError(err?.error);
     }
+  });
+}
+
   }
   compareProfiles(p1: number, p2: number): boolean {
     return p1 === p2;
   }
+goBack(): void {
+  if (this.passwordModal) {
+    this.passwordModal.hide();
+  }
+
+  setTimeout(() => {
+    this.router.navigate(['/users']);
+  }, 200); // da tiempo a Bootstrap a remover el backdrop
+}
+
+
 }

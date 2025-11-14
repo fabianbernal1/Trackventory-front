@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import baserUrl from './helper';
 import { User } from '../models/user';
 import { map } from 'rxjs/operators';
+import { UserPasswordResponse } from '../models/userPasswordResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createUser(user: User, password: string|null): Observable<User> {
+  createUser(user: User, password: string|null): Observable<UserPasswordResponse> {
     const payload = { user, password };
-    return this.httpClient.post<User>(`${baserUrl}/users/`, payload);
+    return this.httpClient.post<UserPasswordResponse>(`${baserUrl}/users/`, payload);
   }
 
   getAllUsers(): Observable<User[]> {
@@ -40,9 +41,9 @@ export class UserService {
     return this.httpClient.get<User>(`${baserUrl}/users/username/${username}`);
   }
 
-  updateUser(id: string, user: User, password?: string): Observable<User> {
+  updateUser(id: string, user: User, password?: string): Observable<UserPasswordResponse> {
     const payload = { user, password };
-    return this.httpClient.put<User>(`${baserUrl}/users/${id}`, payload);
+    return this.httpClient.put<UserPasswordResponse>(`${baserUrl}/users/${id}`, payload);
   }
 
   // Eliminar usuario (por ID)
@@ -55,8 +56,8 @@ export class UserService {
     return this.httpClient.get<any>(`${baserUrl}/users/validate-token`);
   }
 
-  updatePassword(username: string): Observable<User> {
-    return this.httpClient.put<User>(`${baserUrl}/users/UpdatePassword/${username}`, {});
+  updatePassword(username: string): Observable<UserPasswordResponse> {
+    return this.httpClient.put<UserPasswordResponse>(`${baserUrl}/users/UpdatePassword/${username}`, {});
   }
 
 }

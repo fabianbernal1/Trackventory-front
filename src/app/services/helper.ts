@@ -1,2 +1,2 @@
-let baserUrl = 'https://tracventory-back.onrender.com'
+let baserUrl = 'http://localhost:8080'
 export default baserUrl;

@@ -3,6 +3,8 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -11,6 +13,11 @@ import { AlertService } from 'src/app/services/alert.service';
 export class UserListComponent implements OnInit {
 
   users: User[] = [];
+  
+  generatedPassword: string | null = null;
+  private resetPasswordModal: any;
+
+
 
   constructor(
     private userService: UserService,
@@ -47,8 +54,13 @@ export class UserListComponent implements OnInit {
 
   resetPassword(username: string): void {
   this.userService.updatePassword(username).subscribe(
-    () => {
-      this.alertService.showSuccess(`La contraseña del usuario ${username} fue restablecida con éxito`);
+    (response) => {
+
+      this.generatedPassword = response.password;
+
+      // Abrir modal
+      this.resetPasswordModal = new bootstrap.Modal(document.getElementById('resetPasswordModal'));
+      this.resetPasswordModal.show();
     },
     (err) => {
       console.error('Error al restablecer la contraseña', err);
@@ -56,4 +68,10 @@ export class UserListComponent implements OnInit {
     }
   );
 }
+closeModal(): void {
+  if (this.resetPasswordModal) {
+    this.resetPasswordModal.hide();
+  }
+}
+
 }

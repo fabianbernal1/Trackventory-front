@@ -57,3 +57,33 @@
     </div>
   </div>
 </div>
+
+<!-- Modal de contraseña generada -->
+<div class="modal fade" id="resetPasswordModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Contraseña Restablecida</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body text-center">
+        <p class="fw-bold">Se ha generado una nueva contraseña:</p>
+
+        <h4 class="text-primary">{{ generatedPassword }}</h4>
+
+        <p class="mt-3 text-muted">
+          Copia la contraseña y proporciónasela al usuario.
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-dismiss="modal" (click)="closeModal()">
+          Aceptar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

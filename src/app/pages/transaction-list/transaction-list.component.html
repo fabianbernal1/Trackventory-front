@@ -65,6 +65,7 @@
                         <tr>
                           <th>Producto</th>
                           <th>Cantidad</th>
+                          <th>Descuento/th>
                           <th>Valor Total</th>
                         </tr>
                       </thead>
@@ -72,6 +73,7 @@
                         <tr *ngFor="let detail of transactionDetails">
                           <td>{{ detail.stock?.id?.variation?.product?.name }}</td>
                           <td>{{ detail.quantity }}</td>
+                          <td>{{ detail.discount_percentage }}%</td>
                           <td>{{ detail.total | currency }}</td>
                         </tr>
                       </tbody>

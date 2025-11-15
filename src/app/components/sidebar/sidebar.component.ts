@@ -35,18 +35,25 @@ export class SidebarComponent implements OnInit {
   private loadFormsWithPermissions(): void {
     this.formService.getForms().subscribe({
       next: (forms: Form[]) => {
-        // Filtrar los visibles inicialmente
         const visibleForms = forms.filter(f => f.visible);
 
-        // Consultar permisos del usuario
         this.permissionService.getPermissionsByProfile(this.profileId).subscribe({
           next: (permissions: Permission[]) => {
-            // Dejar solo formularios con permiso R en true
-            const allowedForms = visibleForms.filter(form =>
-              permissions.some(p => p.form_pms.id === form.id && p.R)
-            );
 
-            // Construir el menú jerárquico
+            // Filtrar tomando en cuenta permisos
+            let allowedForms = visibleForms.filter(form => {
+              const permission = permissions.find(p => p.form_pms.id === form.id);
+
+              if (!permission || !permission.R) return false; // No puede leer → ocultar
+
+              // 🔹 Validación especial para USERS
+              if (form.url === '/users') {
+                return permission.C && permission.R;
+              }
+
+              return true;
+            });
+
             this.menuTree = this.buildTree(allowedForms);
           },
           error: err => console.error("Error cargando permisos", err)
@@ -56,13 +63,9 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  // Construye la jerarquía respetando padres e hijos permitidos
   private buildTree(forms: Form[]): any[] {
     const formMap = new Map<number, any>();
-
-    forms.forEach(f => {
-      formMap.set(f.id, { ...f, children: [] });
-    });
+    forms.forEach(f => formMap.set(f.id, { ...f, children: [] }));
 
     const tree: any[] = [];
 
@@ -74,6 +77,7 @@ export class SidebarComponent implements OnInit {
       }
     });
 
-    return tree;
+    // 🔹 Opcional: eliminar nodos sin hijos (si sirve como categoría vacía)
+    return tree.filter(node => node.children.length > 0 || !node.parent);
   }
 }

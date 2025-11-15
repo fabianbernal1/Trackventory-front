@@ -53,6 +53,8 @@ import { TransactionCreateEditComponent } from './pages/transaction-create-edit/
 import { UserEditComponent } from './pages/user-edit/user-edit.component';
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 import { ProductClientListComponent } from './pages/product-client-list/product-client-list.component';
+import { AboutComponent } from './pages/about/about.component';
+import { HelpComponent } from './pages/help/help.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +90,9 @@ import { ProductClientListComponent } from './pages/product-client-list/product-
     TransactionCreateEditComponent,
     UserEditComponent,
     PasswordResetComponent,
-    ProductClientListComponent
+    ProductClientListComponent,
+    AboutComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,

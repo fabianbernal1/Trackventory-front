@@ -1,0 +1,15 @@
+<div class="container py-4">
+  <h2 class="text-primary fw-bold mb-4">Ayuda en Línea</h2>
+  <p class="mb-3">Selecciona una opción para ver la solución detallada:</p>
+
+  <div *ngFor="let item of helpItems" class="mb-2">
+    <button class="btn btn-light w-100 text-start border" (click)="toggleFAQ(item)">
+      <strong>{{ item.title }}</strong>
+      <i class="float-end" [class]="item.expanded ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+    </button>
+
+    <div *ngIf="item.expanded" class="p-3 bg-white border border-top-0">
+      <p [innerHTML]="item.description"></p>
+    </div>
+  </div>
+</div>

@@ -15,13 +15,13 @@ export class TransactionService {
   constructor(private http: HttpClient) { }
 
   getAllTransactions(): Observable<Transactions[]> {
-  return this.http.get<Transactions[]>(`${baserUrl}/all`).pipe(
+  return this.http.get<Transactions[]>(`${baserUrl}/transactions/all`).pipe(
     map(transactions => transactions.sort((a, b) => (a.enabled === b.enabled) ? 0 : a.enabled ? -1 : 1))
   );
 }
 
 getActiveTransactions(): Observable<Transactions[]> {
-  return this.http.get<Transactions[]>(`${baserUrl}/all`).pipe(
+  return this.http.get<Transactions[]>(`${baserUrl}/transactions/all`).pipe(
     map(transactions => transactions.filter(tx => tx.enabled))
   );
 }
@@ -29,12 +29,12 @@ getActiveTransactions(): Observable<Transactions[]> {
 
   // Obtener una transacción por ID
   getTransactionById(id: number): Observable<Transactions> {
-    return this.http.get<Transactions>(`${baserUrl}/${id}`);
+    return this.http.get<Transactions>(`${baserUrl}/transactions/${id}`);
   }
 
   // Obtener los detalles de una transacción específica
   getTransactionDetailsByTransactionId(id: number): Observable<TransactionDetails[]> {
-    return this.http.get<TransactionDetails[]>(`${baserUrl}/${id}/details`);
+    return this.http.get<TransactionDetails[]>(`${baserUrl}/transactions/${id}/details`);
   }
 
   saveTransaction(
@@ -51,17 +51,17 @@ getActiveTransactions(): Observable<Transactions[]> {
       params = params.set('transactionDate', formattedDate);
     }
 
-    return this.http.post<Transactions>(`${baserUrl}/save`, transactionDetails, { params });
+    return this.http.post<Transactions>(`${baserUrl}/transactions/save`, transactionDetails, { params });
   }
 
   // Obtener transacciones por tipo de transacción
   getTransactionsByType(transactionTypeId: number): Observable<Transactions[]> {
     const params = new HttpParams().set('transactionTypeId', transactionTypeId.toString());
-    return this.http.get<Transactions[]>(`${baserUrl}/by-type`, { params });
+    return this.http.get<Transactions[]>(`${baserUrl}/transactions/by-type`, { params });
   }
 
   // Eliminar una transacción por ID
   deleteTransaction(id: number): Observable<void> {
-    return this.http.delete<void>(`${baserUrl}/delete/${id}`);
+    return this.http.delete<void>(`${baserUrl}/transactions/delete/${id}`);
   }
 }

@@ -74,6 +74,7 @@ export class StockCreateEditComponent implements OnInit {
     this.productVariationService.getActiveProductVariations().subscribe({
       next: (variations) => {
         this.productVariations = variations;
+        console.log(variations);
       },
       error: (err) => console.error('Error cargando las variaciones de producto', err)
     });

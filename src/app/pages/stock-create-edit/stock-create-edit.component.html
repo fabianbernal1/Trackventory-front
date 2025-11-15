@@ -20,7 +20,7 @@
             <select class="form-control" id="variationSelect" [(ngModel)]="stock.id.variation" name="variationStk"
               required [compareWith]="compareVariations" [disabled]="isEditMode">
               <option *ngFor="let variation of productVariations" [ngValue]="variation">
-                {{ variation.variationId }}
+                {{ variation.product.name }} ({{ variation.color.name }})
               </option>
             </select>
           </div>

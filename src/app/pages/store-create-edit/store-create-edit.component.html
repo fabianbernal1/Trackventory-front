@@ -47,7 +47,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let stock of stocks">
-                  <td>{{ stock.id.variation.variationId }}</td>
+                  <td>{{ stock.id.variation.variationId }} {{ stock.id.variation.product.name }}({{ stock.id.variation.color.name }})</td>
                   <td>{{ stock.quantity }}</td>
                   <td>
                     <span class="badge" [ngClass]="stock.enabled ? 'badge-success' : 'badge-secondary'">

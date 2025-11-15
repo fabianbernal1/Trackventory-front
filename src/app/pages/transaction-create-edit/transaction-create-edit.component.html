@@ -72,6 +72,7 @@
               <th>Stock</th>
               <th>Tienda</th>
               <th>Cantidad</th>
+              <th>Descuento</th>
               <th>Valor</th>
               <th>Estado</th>
               <th class="text-center">Acciones</th>
@@ -82,11 +83,12 @@
               <td>{{ detail.stock?.id?.variation?.product?.name || 'Sin Stock' }}</td>
               <td>{{ detail.stock?.id?.store?.name}}</td>
               <td>{{ detail.quantity }}</td>
+              <td>{{ detail.discount_percentage}}</td>
               <td>{{ detail.total | currency }}</td>
               <td>
                 <span class="badge" [ngClass]="detail.enabled ? 'badge-success' : 'badge-secondary'">
-                    {{ detail.enabled ? 'Habilitado' : 'Deshabilitado' }}
-                  </span>
+                  {{ detail.enabled ? 'Habilitado' : 'Deshabilitado' }}
+                </span>
               </td>
               <td class="text-center">
                 <button type="button" class="btn btn-sm btn-danger" (click)="deleteTransactionDetail(detail.id)">
@@ -112,13 +114,19 @@
         <div class="form-group">
           <label for="stock">Stock</label>
           <select class="form-control" [(ngModel)]="newTransactionDetail.stock" name="stock" required>
-            <option *ngFor="let stock of stocks" [ngValue]="stock">{{ stock.id.variation.product.name }} ({{ stock.id.store.name }})</option>
+            <option *ngFor="let stock of stocks" [ngValue]="stock">{{ stock.id.variation.product.name }} ({{
+              stock.id.store.name }})</option>
           </select>
         </div>
         <div class="form-group mt-2">
           <label for="quantity">Cantidad</label>
           <input type="number" class="form-control" [(ngModel)]="newTransactionDetail.quantity" name="quantity" required
             [max]="newTransactionDetail.stock?.quantity || null" [min]="1" (input)="validateQuantity()">
+        </div>
+        <div class="form-group mt-2">
+          <label for="discount">Descuento (%)</label>
+          <input type="number" class="form-control" [(ngModel)]="newTransactionDetail.discount_percentage"
+            name="discount_percentage" min="0" max="100" required>
         </div>
         <button type="button" class="btn btn-success mt-3" (click)="addTransactionDetail()">
           <i class="fas fa-plus"></i> Agregar Detalle

@@ -31,7 +31,7 @@ export class TransactionCreateEditComponent implements OnInit {
   };
 
   transactionDetails: TransactionDetails[] = [];
-  newTransactionDetail: TransactionDetails = { id: 0, transaction: this.transaction, stock: null, quantity: 1, total: 0,enabled: true };
+  newTransactionDetail: TransactionDetails = { id: 0, transaction: this.transaction, stock: null, quantity: 1,discount_percentage: 0, total: 0,enabled: true };
 
   stocks: Stock[] = [];
   users: User[] = [];
@@ -112,15 +112,26 @@ export class TransactionCreateEditComponent implements OnInit {
   }
 
   addTransactionDetail(): void {
-    if (this.newTransactionDetail.stock && this.newTransactionDetail.quantity > 0) {
-      this.newTransactionDetail.total = this.newTransactionDetail.stock.id.variation.product.salePrice * this.newTransactionDetail.quantity;
-      this.transactionDetails.push({ ...this.newTransactionDetail });
-      this.transactionDetails = [...this.transactionDetails];
-      this.newTransactionDetail = { id: 0, transaction: this.transaction, stock: null, quantity: 1, total: 0,enabled: true };
-    } else {
-      this.alertService.showError('Debe llenar los campos del detalle.');
-    }
+  if (this.newTransactionDetail.stock && this.newTransactionDetail.quantity > 0) {
+    
+    const basePrice = this.newTransactionDetail.stock.id.variation.product.salePrice;
+    const qty = this.newTransactionDetail.quantity;
+    const discount = this.newTransactionDetail.discount_percentage ?? 0;
+
+    const subtotal = basePrice * qty;
+    const total = subtotal - (subtotal * (discount / 100));
+
+    this.newTransactionDetail.total = total;
+
+    this.transactionDetails.push({ ...this.newTransactionDetail });
+    this.transactionDetails = [...this.transactionDetails];
+
+    this.newTransactionDetail = { id: 0, transaction: this.transaction, stock: null, quantity: 1, total: 0, discount_percentage: 0, enabled: true };
+  } else {
+    this.alertService.showError('Debe llenar los campos del detalle.');
   }
+}
+
 
   deleteTransactionDetail(id: number): void {
     this.transactionDetails = this.transactionDetails.filter(d => d.id !== id);

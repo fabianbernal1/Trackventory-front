@@ -6,6 +6,7 @@ export interface TransactionDetails {
   transaction: Transactions;
   stock: Stock|null;
   quantity: number;
+  discount_percentage: number; 
   total: number;
   enabled: boolean;
 }

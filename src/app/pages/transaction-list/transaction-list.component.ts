@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { Transactions } from 'src/app/models/trasanctions';
 import { TransactionDetails } from 'src/app/models/transactionDetails';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-transaction-list',
@@ -14,7 +15,7 @@ export class TransactionListComponent implements OnInit {
   selectedTransactionId: number | null = null;
   totalTransactionValue: number = 0;
 
-  constructor(private transactionService: TransactionService) {}
+  constructor(private transactionService: TransactionService,private alertService: AlertService,) {}
 
   ngOnInit(): void {
     this.loadTransactions();
@@ -48,5 +49,22 @@ export class TransactionListComponent implements OnInit {
       this.selectedTransactionId = transactionId;
       this.loadTransactionDetails(transactionId);
     }
+  }
+  downloadReport(): void {
+    this.transactionService.downloadReport().subscribe(
+      (response) => {
+        const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'reporteStock.xlsx';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      (err) => {
+        console.error('Error al descargar el reporte:', err);
+        this.alertService.showError(err?.error);
+      }
+    );
   }
 }

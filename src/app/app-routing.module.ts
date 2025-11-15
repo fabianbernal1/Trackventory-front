@@ -28,6 +28,7 @@ import { TransactionListComponent } from './pages/transaction-list/transaction-l
 import { TransactionCreateEditComponent } from './pages/transaction-create-edit/transaction-create-edit.component';
 import { UserEditComponent } from './pages/user-edit/user-edit.component';
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
+import { ProductClientListComponent } from './pages/product-client-list/product-client-list.component';
 
 
 const routes: Routes = [
@@ -255,6 +256,12 @@ const routes: Routes = [
     path : 'passwordReset',
     component : PasswordResetComponent ,
     pathMatch : 'full'
+  },
+  {
+    path : 'clientProducts',
+    component : ProductClientListComponent,
+    pathMatch : 'full',
+    canActivate:[AuthGuardGuard]
   }
 ];
 

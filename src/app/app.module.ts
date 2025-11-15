@@ -52,6 +52,7 @@ import { TransactionListComponent } from './pages/transaction-list/transaction-l
 import { TransactionCreateEditComponent } from './pages/transaction-create-edit/transaction-create-edit.component';
 import { UserEditComponent } from './pages/user-edit/user-edit.component';
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
+import { ProductClientListComponent } from './pages/product-client-list/product-client-list.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { PasswordResetComponent } from './pages/password-reset/password-reset.co
     TransactionListComponent,
     TransactionCreateEditComponent,
     UserEditComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
+    ProductClientListComponent
   ],
   imports: [
     BrowserModule,

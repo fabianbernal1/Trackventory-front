@@ -64,4 +64,12 @@ getActiveTransactions(): Observable<Transactions[]> {
   deleteTransaction(id: number): Observable<void> {
     return this.http.delete<void>(`${baserUrl}/transactions/delete/${id}`);
   }
+
+  // Método para descargar el reporte en Excel
+  downloadReport(): Observable<Blob> {
+    return this.http.get(`${baserUrl}/transactions/report`, {
+      responseType: 'blob' 
+    });
+  }
+
 }

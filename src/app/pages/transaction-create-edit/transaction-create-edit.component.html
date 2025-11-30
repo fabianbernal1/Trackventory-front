@@ -114,7 +114,7 @@
         <div class="form-group">
           <label for="stock">Stock</label>
           <select class="form-control" [(ngModel)]="newTransactionDetail.stock" name="stock" required>
-            <option *ngFor="let stock of stocks" [ngValue]="stock">{{ stock.id.variation.product.name }} ({{
+            <option *ngFor="let stock of stocks" [ngValue]="stock">{{ stock.id.variation.product.name }} - {{ stock.id.variation.color.name }} ({{
               stock.id.store.name }})</option>
           </select>
         </div>

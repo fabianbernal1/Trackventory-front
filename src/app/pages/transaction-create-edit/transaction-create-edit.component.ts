@@ -114,7 +114,18 @@ export class TransactionCreateEditComponent implements OnInit {
   addTransactionDetail(): void {
   if (this.newTransactionDetail.stock && this.newTransactionDetail.quantity > 0) {
     
-    const basePrice = this.newTransactionDetail.stock.id.variation.product.salePrice;
+    // Determinar precio según tipo de transacción
+    let basePrice = 0;
+    const typeId = this.transaction.transactionType?.id;
+
+    if (typeId === 1 || typeId === 4) {
+      basePrice = this.newTransactionDetail.stock.id.variation.product.salePrice;
+    } else if (typeId === 2 || typeId === 3) {
+      basePrice = this.newTransactionDetail.stock.id.variation.product.purchasePrice;
+    } else {
+      basePrice = this.newTransactionDetail.stock.id.variation.product.salePrice;
+    }
+
     const qty = this.newTransactionDetail.quantity;
     const discount = this.newTransactionDetail.discount_percentage ?? 0;
 
